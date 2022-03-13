@@ -1,0 +1,6 @@
+{
+	"entryPoints": [
+        "./src/name_exercice"
+	], 
+	"out": "./docs/typedoc"
+}
