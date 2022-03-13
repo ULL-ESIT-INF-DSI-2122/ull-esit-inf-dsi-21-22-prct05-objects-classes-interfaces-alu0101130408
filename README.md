@@ -1,6 +1,3 @@
-# ull-esit-inf-dsi-21-22-prct05-objects-classes-interfaces-alu0101130408
-ull-esit-inf-dsi-21-22-prct05-objects-classes-interfaces-alu0101130408 created by GitHub Classroom
-
 # Práctica 5: Objetos, clases e interfaces
 ## Autor: Joel Francisco Escobar Socas.
 ## Asignatura: Desarrollo de Sistemas Informáticos.
