@@ -24,8 +24,8 @@ export class Pokemon {
 
     this.Estadisticas.ataque = Estadisticas[0];
     this.Estadisticas.defensa = Estadisticas[1];
-    this.Estadisticas.salud = Estadisticas[2];
-      this.Estadisticas.velocidad = Estadisticas[3];
+    this.Estadisticas.velocidad = Estadisticas[2];
+		this.Estadisticas.salud = Estadisticas[3];
   }
 
   /**
@@ -51,7 +51,7 @@ export class Pokemon {
   */
 
   public getAltura() {
-    this.altura;
+    return this.altura;
   }
 
 

@@ -51,8 +51,7 @@ export class Pokedex {
    */
   public mostrarPokedex() {
     console.log(`──────────────────────────────────────────────`);
-    console.log(`──/ POKEDEX /──`);
-    console.log(`	» Los Pokemons Recogidos en la Pokedex son:`);
+    console.log(`	» Los Pokemons Recogidos en la Pokedex son:«`);
     console.log(this.baseDatosPokemon);
     console.log(`──────────────────────────────────────────────`);
   }
