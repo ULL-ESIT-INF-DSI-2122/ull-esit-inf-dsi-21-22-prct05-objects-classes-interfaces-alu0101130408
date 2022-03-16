@@ -227,10 +227,11 @@ Para poder simular el combate entre los dos Pokemons se ha llevado a cabo la cla
 
 Una es *CalculoDañoInflingido* donde reciclamos y modificamos el [ejercicio 8](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct03-types-functions-alu0101130408/blob/main/src/pokemon.ts) llevado a cabo en la práctica 3 de la asignatura donde dependiendo del tipo del Pokemon se calculaba el daño inflingido a través de la fórmula especificada siendo esta: **"50 *( ataque/defensa) * efectividad "**. Por lo que modificamos esta función y en base al tipo del primer pokemon dependiendo del tipo del segundo pokemon modificamos el valor de la efectividad del ataque. Por ejemplo, si el pokemón inicial es de tipo fuego y el pokemon al que se enfrenta es de tipo hierba entonces la efectividad es de 2. Puesto que el fuego quema la Hierba. siguiendo esta logica definimos todos los casos posibles. Pero como los pokemons se turnan al atacar tenemos que ver si el Pokemon que ataca es el primero o el segundo ya que entonces cambiara la efectividad del ataque, en resumidas cuenta no es lo mismo que ataque el fuego a la hierba que la hierba al fuego. Por lo que a través de una variable numerica llamada _atacante_  miramos si el que ataca es el primer pokemon donde caculamos el daño de ataque del priemr pokemon y defensa del segundo pokemon y la efectividad prestablecida. En cambio de que el atacante sea el segundo pokemon entonces cambiamos la efectividad establecida si es 2 será 0.5 y si es 0.5 será 2 y calculamos el ataque del pokemon 2 entre la defensa del pokemon 1 de esta forma definimos los turnos.
 
-La última función es la encargada de realizar el combate en base a las reglas establecidas. El Pokemon atacante al incio será el primero en salir posteriormente mientras la vida de ninguno de ellos llegue a 0 o a un valor menos se lanzan ataques por turnos. en el caso de que el Pokemon atacante sea el primero entonces establecemos la nueva vida del segundo Pokemon a través del método _setSalud_ donde el número que se le pasa es la vida actual del pokemon menos el daño Infligido por el atacante y mostramos la vida actual del Objetivo. Y de forma viceversa en caso de que el atacante sea el segundo Pokemon, de esta forma el primero a llegar a cero pierde el combate y su contrincante es considerado el Ganador.
+La última función es la encargada de realizar el combate en base a las reglas establecidas. El Pokemon atacante al incio tal y como sucede en los juegos de la francquicia Pokemon, el atacante será aquel que tenga mayor velocidad por lo que comprobamos la velocidad de cada pokemon y establecemos en base a esta quien empieza atacando, posteriormente mientras la vida de ninguno de ellos llegue a 0 o a un valor menos se lanzan ataques por turnos. en el caso de que el Pokemon atacante sea el primero entonces establecemos la nueva vida del segundo Pokemon a través del método _setSalud_ donde el número que se le pasa es la vida actual del pokemon menos el daño Infligido por el atacante y mostramos la vida actual del Objetivo. Y de forma viceversa en caso de que el atacante sea el segundo Pokemon, de esta forma el primero a llegar a cero pierde el combate y su contrincante es considerado el Ganador.
 
 ```TypeScript
 import { Pokemon } from "./pokemon";
+
 export class Combat {
 
   constructor(private pokemon1: Pokemon, private pokemon2: Pokemon){
@@ -313,11 +314,20 @@ export class Combat {
 
   public combatePokemon(): string {
     let atacante: number = 1;
+    if( this.pokemon1.getEstadisticas().velocidad >= this.pokemon2.getEstadisticas().velocidad) {
+      atacante =  1;
+    } else {
+      if( this.pokemon1.getEstadisticas().velocidad < this.pokemon2.getEstadisticas().velocidad) {
+        atacante =  2;
+      }
+    }
+    
     console.log(`──────────────────────────────────────────────────────────────────`);
     console.log(`» ${this.pokemon1.getNombre()}  vs   ${this.pokemon2.getNombre()}`);
     console.log(`» Vida: ${this.pokemon1.getEstadisticas().salud}      » Vida: ${this.pokemon2.getEstadisticas().salud}`);
     console.log(`» Ataque: ${this.pokemon1.getEstadisticas().ataque}    » Ataque: ${this.pokemon2.getEstadisticas().ataque}`);
     console.log(`» Defensa: ${this.pokemon1.getEstadisticas().defensa}   » Defensa: ${this.pokemon2.getEstadisticas().defensa}`);
+    console.log(`» Velocidad: ${this.pokemon1.getEstadisticas().velocidad} » Velocidad: ${this.pokemon2.getEstadisticas().velocidad}`);
     console.log(`──────────────────────────────────────────────────────────────────`);
 
     while( (this.pokemon1.getEstadisticas().salud > 0) && (this.pokemon2.getEstadisticas().salud > 0) ) {

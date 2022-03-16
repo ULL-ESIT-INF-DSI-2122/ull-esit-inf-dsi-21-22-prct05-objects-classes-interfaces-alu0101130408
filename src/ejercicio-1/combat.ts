@@ -96,11 +96,20 @@ export class Combat {
    */
   public combatePokemon(): string {
     let atacante: number = 1;
+    if( this.pokemon1.getEstadisticas().velocidad >= this.pokemon2.getEstadisticas().velocidad) {
+      atacante =  1;
+    } else {
+      if( this.pokemon1.getEstadisticas().velocidad < this.pokemon2.getEstadisticas().velocidad) {
+        atacante =  2;
+      }
+    }
+    
     console.log(`──────────────────────────────────────────────────────────────────`);
     console.log(`» ${this.pokemon1.getNombre()}  vs   ${this.pokemon2.getNombre()}`);
     console.log(`» Vida: ${this.pokemon1.getEstadisticas().salud}      » Vida: ${this.pokemon2.getEstadisticas().salud}`);
     console.log(`» Ataque: ${this.pokemon1.getEstadisticas().ataque}    » Ataque: ${this.pokemon2.getEstadisticas().ataque}`);
     console.log(`» Defensa: ${this.pokemon1.getEstadisticas().defensa}   » Defensa: ${this.pokemon2.getEstadisticas().defensa}`);
+    console.log(`» Velocidad: ${this.pokemon1.getEstadisticas().velocidad} » Velocidad: ${this.pokemon2.getEstadisticas().velocidad}`);
     console.log(`──────────────────────────────────────────────────────────────────`);
 
     while( (this.pokemon1.getEstadisticas().salud > 0) && (this.pokemon2.getEstadisticas().salud > 0) ) {
