@@ -398,6 +398,131 @@ describe ('Test de la clase Combat', () =>{
 
 #### 2.2 Ejercicio 2: Conecta 4.
 
+Para solucionar el ejercicio 2 correspondiente a implementar el juego del conecta 4 en TypeScript he decidido implementar 2 clases:
+
+* La clase **Tablero**:
+Esta clase es la encargada de definir el tablero de juego del Conecta 4, recibe como parametros el numero de filas, de columnas y el valor inicial que contendra el tablero. Un tablero de conecta 4 esta formado por 6 filas y 7 columnas e inciialmente estará vacío. Para representar las fichas se usará el carácter 'X' para representar las fichas del jugador del equipo rojo y el caracter 'O' Para las fichas del jugador del equipo Amarillo. Posteriormente se realizan los métodos necesarios para realizar el funcionamiento del tablero.
+
+Por un lado los metodos *initFilas* y *initColumnas* inicializan en nuestro vector de vectores de string denomiando tablero el tamaño de ambos vectores que definen a la matriz. Con el método *obtenerFilasLibres* recorremos desde el fondo del tablero si en la columna especificada existe previamente algún valor, en caso positivo se devuelve un -1 y en caso de que este vacío se devuelve esta posición. Esta función la utilizaremos en *colocarFicha* para comprobar que la posicion donde queremos colocar la ficha no este vacía. En caso de estar vacía se coloca la ficha en esa posición , en caso negativo accedemos a la siguiente posición.
+
+Y con el método *contarNorte* inicializamos un contador y si en la posicion referente al norte (i-1)(j) de la ficha contamos si se encuentra alguno de los valores especificado
+
+```TypeScript
+
+export class Tablero {
+  private fil: number;
+  private col: number;
+  private value: string;
+  private tablero : Array<Array<string>> =  new Array<Array<string>>();
+
+  constructor(fil: number, col: number, value:string) {
+    this.fil = fil;
+    this.col = col;
+    this.value = value;
+    this.initFilas(fil);
+    this.initColumnas(col, value);
+
+  }
+
+  getFil(){
+    return this.fil;
+  }
+
+  getCol() {
+    return this.col;
+  }
+
+  private initFilas(filas: number): void | undefined {
+    if (filas < 1) {
+      return undefined;
+    } else {
+      for(let i: number = 0; i < filas; i++) {
+        this.tablero.push(new Array<string>());
+      }
+    }
+  }
+
+  private initColumnas(columnas: number, valor: string): void | undefined {
+    if (columnas < 1) {
+      return undefined;
+    }
+    for (let i: number = 0; i < this.tablero.length; i++ ) {
+      for(let j: number = 0; j < columnas; j++) {
+        this.tablero[i].push(valor);
+      }
+    }
+  }
+
+  public getTablero() {
+    return this.tablero;
+  }
+
+  public getValue(filas: number, columnas: number): string | undefined {
+    if(filas < 0 || filas >= this.fil || columnas < 0 || columnas >= this.col) {
+      return undefined;
+    }
+    return this.tablero[filas][columnas];
+  }
+
+  public imprimirTablero() {
+    console.log(`Visualización del Tablero:`);
+    console.log(this.tablero);
+  }
+
+  public obtenerFilaLibre(columna: number): number {
+    for (let i:number = this.fil -1; i >= 0 ; i--) {
+      if(this.tablero[i][columna] == '') {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  public colocarFicha(valor: string, columna:number): void | undefined {
+    if( columna < 0 || columna >= this.col) {
+      return undefined;
+    }
+
+    let filas: number = this.obtenerFilaLibre(columna);
+    this.tablero[filas][columna] = valor; 
+  } 
+
+  public limpiartableroVacio() {
+    for(let i: number = 0; i < this.col; i ++) {
+      let resultado: number = this.obtenerFilaLibre(i); 
+      if (resultado != -1) {
+        return 0;
+      }
+    }
+    return 1;
+  }
+
+  public contarNorte() {
+    let contador: number = 0;
+    for(let i: number = this.fil-1; i >= 0 ; i++) {
+      for(let j:number = 0; j < this.col; j++) {
+        if((this.tablero[i-1][j] == 'x') || (this.tablero[i-1][j] == 'o')) {
+          contador ++;
+        }
+      }
+    }
+  
+    return contador;
+  }
+
+} 
+```
+
+Para implementar los test de la clase Tablero lo que hacemos es definir un tablero de juego de tamaño 6x7 y comprobamos que se crea correctamente y todas las posiciones tengan un valor y no sean **Null**.
+
+```TypeScript
+
+```
+
+
+* Clase **Partida**:
+
+
 
 ### Problemas y Soluciones.
 

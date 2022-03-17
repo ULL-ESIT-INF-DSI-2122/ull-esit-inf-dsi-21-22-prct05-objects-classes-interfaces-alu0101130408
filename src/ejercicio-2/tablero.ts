@@ -9,10 +9,10 @@ import {Ficha} from './ficha';
 export class Tablero {
   private fil: number;
   private col: number;
-  private value: number;
-  private tablero : Array<Array<number>> =  new Array<Array<number>>();
+  private value: string;
+  private tablero : Array<Array<string>> =  new Array<Array<string>>();
 
-  constructor(fil: number, col: number, value:number) {
+  constructor(fil: number, col: number, value:string) {
     this.fil = fil;
     this.col = col;
     this.value = value;
@@ -21,6 +21,21 @@ export class Tablero {
 
   }
 
+  /**
+   * Funcion que devuelve las filas del tablero
+   * @returns las filas del tablero
+   */
+  getFil(){
+    return this.fil;
+  }
+
+  /**
+   * Funcion que devuelve las columnas del tablero
+   * @returns las columnas del tablero
+   */
+  getCol() {
+    return this.col;
+  }
   /**
    * Método privado que inicializa las filas de un tablero
    * @param filas El numero de filas que se le pasa.
@@ -31,7 +46,7 @@ export class Tablero {
       return undefined;
     } else {
       for(let i: number = 0; i < filas; i++) {
-        this.tablero.push(new Array<number>());
+        this.tablero.push(new Array<string>());
       }
     }
   }
@@ -42,7 +57,7 @@ export class Tablero {
    * @param valor Valor que ira en las posiciones, inicialmente a 0.
    */
 
-  private initColumnas(columnas: number, valor: number): void | undefined {
+  private initColumnas(columnas: number, valor: string): void | undefined {
     if (columnas < 1) {
       return undefined;
     }
@@ -68,31 +83,81 @@ export class Tablero {
    * @returns devuelve el valor en esa posicion si es una posicion definida en la matriz, sino devuelve un undefined.
    */
 
-  public getValor(filas: number, columnas: number): number | undefined {
-    if (filas < 0 || columnas < 0 || filas >= this.fil || columnas >= this.col) {
+  public getValue(filas: number, columnas: number): string | undefined {
+    if(filas < 0 || filas >= this.fil || columnas < 0 || columnas >= this.col) {
       return undefined;
     }
     return this.tablero[filas][columnas];
-  }
-
-  /**
-   * Función que establece el valor en una posicion de la matriz.
-   * @param filas posicion de las filas donde se quiere almacenar un valor.
-   * @param columnas posicion de las columnas donde se quiere almacenar un valor.
-   * @param valor valor que se va a almacenar en la posicion tablero[filas][columnas]
-   * @returns no devuelve nada ya que solo establece un valor, en caso de que este fuera de la matriz devuelve undefiend
-   */
-  public setValue(filas: number, columnas: number, valor: number): void | undefined {
-    if (filas < 0 || columnas < 0 || filas >= this.fil || columnas >= this.col) {
-      return undefined;
-    }
-    this.tablero[filas][columnas] = valor;
+    
   }
 
   /**
    * Funcion que imprime por pantalla el tablero.
    */
   public imprimirTablero() {
+    console.log(`Visualización del Tablero:`);
     console.log(this.tablero);
   }
+
+  /**
+   * Funcion publica que analiza si una columna esta llena
+   * @param columna columna donde se quiere colocar una ficha
+   * @returns devuelve la fila si esta vacía
+   */
+  public obtenerFilaLibre(columna: number): number {
+    for (let i:number = this.fil -1; i >= 0 ; i--) {
+      if(this.tablero[i][columna] == '') {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  /**
+   * Función publicaque coloca una ficha en la columna especificada
+   * @param valor valor O u X que indica las fichas
+   * @param columna columna donde se coloca la ficha
+   * @returns devuelve la ficha colocada en ese tablero
+   */
+  public colocarFicha(valor: string, columna:number): void | undefined {
+    if( columna < 0 || columna >= this.col) {
+      return undefined;
+    }
+
+    let filas: number = this.obtenerFilaLibre(columna);
+    this.tablero[filas][columna] = valor;
+    
+  } 
+
+  /**
+   * Funcion encargada de limpiar el tablero
+   * @returns devuelve el tablero vacio.
+   */
+  public limpiartableroVacio() {
+    for(let i: number = 0; i < this.col; i ++) {
+      let resultado: number = this.obtenerFilaLibre(i); 
+      if (resultado != -1) {
+        return 0;
+      }
+    }
+    return 1;
+  }
+  // Norte (i-1,j), Sur(i+1,j), este(i,j+1), oeste(i,j-1)
+  /**
+   * Función que cuenta el numero de fichas colocadas en las posiciones Norte
+   * @returns numero de fichas de un jugador colocadas en las posiciones norte
+   */
+  public contarNorte() {
+    let contador: number = 0;
+    for(let i: number = this.fil-1; i >= 0 ; i++) {
+      for(let j:number = 0; j < this.col; j++) {
+        if((this.tablero[i-1][j] == 'x') || (this.tablero[i-1][j] == 'o')) {
+          contador ++;
+        }
+      }
+    }
+  
+    return contador;
+  }
+
 } 
