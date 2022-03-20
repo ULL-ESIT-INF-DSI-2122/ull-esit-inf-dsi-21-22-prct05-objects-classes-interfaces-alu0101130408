@@ -515,17 +515,115 @@ export class Tablero {
 } 
 ```
 
-Para implementar los test de la clase Tablero lo que hacemos es definir un tablero de juego de tamaño 6x7 y comprobamos que se crea correctamente y todas las posiciones tengan un valor y no sean **Null**.
+Para implementar los test de la clase Tablero lo que hacemos es definir un tablero de juego de tamaño 6x7 y comprobamos que se crea correctamente y todas las posiciones tengan un valor y no sean **Null**, posteriormente introducimos un par de fichas en las posiciones correspondientes y las visualizamos por consola para ver si su resultado es el esperado.
 
 ```TypeScript
+import 'mocha';
+import {expect} from 'chai';
+import {Tablero} from '../src/ejercicio-2/tablero'
 
+const tablero1: Tablero =  new Tablero(6,7,'');
+
+describe('Test de la clase Tablero', ()=> {
+  it ('Instancia de un Tablero de juego de dimensiones 6x7', ()=>{
+    expect(tablero1).to.exist;
+    expect(tablero1).not.null;
+    expect(tablero2).to.exist;
+    expect(tablero2).not.null;
+  });
+
+  it('Comprobacion de las funciones y metodos de la clase Tablero', ()=> {
+    tablero1.colocarFicha('X', 2);
+    tablero1.colocarFicha('X', 2);
+    tablero1.colocarFicha('X', 3);
+    tablero1.colocarFicha('X', 3);
+    tablero1.imprimirTablero();
+  });
+
+});
 ```
 
 
 * Clase **Partida**:
 
+Para la implementacion de una partida entre dos jugadores he decidido crear la clase partida que define dos jugadores y el tablero de juego y en la función pública **inicioJuego** lo que realizamos es comprobar que no se ha acabado la partida, es decir, que no ha llegado a 4 el numeros de fichas colocadas y ir alternando turnos  y que el jugador coloque fichas en sus respectivos turnos al final se comprueba el numero final de fichas y si llega a 4 se obtiene un ganador.
 
+```TypeScript
 
+class Partida {
+
+  constructor(private jugador1: string , private jugador2: string, private tablero: Tablero) {
+    this.jugador1 = jugador1;
+    this.jugador2 = jugador2;
+    this.tablero = tablero;
+  } 
+
+  getJugador1() {
+    return this.jugador1;
+  }
+
+  getJugador2() {
+    return this.jugador2
+  }
+
+  getTablero() {
+    return this.tablero;
+  }
+
+  public inicioJuego(tablero: Tablero) {
+    let turno: number = 1;
+
+    while( (tablero.contarNorte() != 4) || (tablero.contarEste()!= 4) || (tablero.contarDiagonal() != 4)) {
+      let turno: number = 1;
+      if(turno = 1) {
+        console.log(`»» Es turno de: ${this.jugador1}`);
+        // En este punto de codigo para colocar ficha se podria mandar un mensaje con funciones de librerias como scanf que permita solicitar al jugador correspondiente una ficha.
+        tablero.colocarFicha('X', 3);
+        turno = 2;
+      } else {
+        console.log(`»» Es turno de: ${this.jugador2}`);
+        // En este punto de codigo para colocar ficha se podria mandar un mensaje con funciones de librerias como scanf que permita solicitar al jugador correspondiente una ficha.
+        tablero.colocarFicha('O', 4);
+        turno = 1;
+      }
+    }
+    /*
+    La idea es 
+    if(jugador1 es el que ha llegado a 4 fichas ) {
+      console.log(`El ganador es {this.jugador1.getJugador1()}`);
+      return this.jugador1.getJugador1();
+    } else {
+      console.log(`El ganador es {this.jugador2.getJugador2()}`);
+      return this.jugador2.getJugador2();
+    }*/
+  }
+
+```
+Los test de la clase **Partida**, no funcionan puesto que este ejercicio no esta terminado, pero serian como:
+
+```TypeScript 
+import 'mocha';
+import {expect} from 'chai';
+import {Tablero} from '../src/ejercicio-2/tablero'
+import {Partida} from '../src/ejercicio-2/partida';
+
+const tablero1: Tablero =  new Tablero(6,7,'');
+const tablero2: Tablero =  new Tablero(6,7,'');
+
+const Game1: Partida =  new Partida('Alfonso', 'Jaime', tablero2)
+
+describe('Test de la clase Partida', ()=> {
+  it ('Instancia de un juego entre Alfonso y Jaime', ()=>{
+    expect(Game1).to.exist;
+    expect(Game1).not.null;
+  });
+
+  it('Comprobacion de las funciones y metodos de la clase Partida', ()=> {
+    expect(Game1.inicioJuego(tablero2)).to.be.eql('Alfonso');
+  });
+
+});
+```
 ### Problemas y Soluciones.
 
 * No he podido terminar el ejercicio 2 de la práctica puesto que no calcula bien los vecinos en las posiciones vertical, horizontal y diagonal. Por lo que el programa no llega a calcular cuando coinciden 4 fichas juntas. Sin embargo, la instancia de un tablero y la capacidad de almacenar  y colocar fichas primero en las posiciones más bajas de la matriz se ha probado y implementado correctamente. 

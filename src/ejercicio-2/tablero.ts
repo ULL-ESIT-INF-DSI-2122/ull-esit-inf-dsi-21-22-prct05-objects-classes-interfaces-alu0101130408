@@ -143,19 +143,52 @@ export class Tablero {
   }
   // Norte (i-1,j), Sur(i+1,j), este(i,j+1), oeste(i,j-1)
   /**
-   * Función que cuenta el numero de fichas colocadas en las posiciones Norte
-   * @returns numero de fichas de un jugador colocadas en las posiciones norte
+   * Función que cuenta el numero de fichas colocadas en las posiciones Norte.
+   * @returns numero de fichas de un jugador colocadas en vertical.
    */
   public contarNorte() {
     let contador: number = 0;
     for(let i: number = this.fil-1; i >= 0 ; i++) {
       for(let j:number = 0; j < this.col; j++) {
-        if((this.tablero[i-1][j] == 'x') || (this.tablero[i-1][j] == 'o')) {
+        if((this.tablero[i-1][j] == 'x') || (this.tablero[i-1][j] == 'O')) {
           contador ++;
         }
       }
     }
   
+    return contador;
+  }
+
+  /**
+   * Función que cuenta el numero de fichas colocadas en la posicion Este.
+   * @returns numero de fichas colocadas en horizontal.
+   */
+  public contarEste() {
+    let contador: number = 0;
+    for(let i: number = this.fil-1; i >= 0 ; i++) {
+      for(let j:number = 0; j < this.col; j++) {
+        if((this.tablero[i][j]+1 == 'x') || (this.tablero[i][j+1] == 'O')) {
+          contador ++;
+        }
+      }
+    }
+  
+    return contador;
+  }
+
+  /**
+   * Funcion que cuenta el numero de fichas colcoadas en NortEste.
+   * @returns numero de fichas colocadas en diagonal.
+   */
+  public contarDiagonal() {
+    let contador: number = 0;
+    for(let i: number = this.fil-1; i >= 0 ; i++) {
+      for(let j:number = 0; j < this.col; j++) {
+        if((this.tablero[i-1][j+1] == 'x') || (this.tablero[i-1][j+1] == 'O')) {
+          contador ++;
+        }
+      }
+    }
     return contador;
   }
 
