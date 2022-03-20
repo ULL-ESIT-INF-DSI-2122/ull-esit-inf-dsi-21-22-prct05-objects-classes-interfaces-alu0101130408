@@ -462,6 +462,7 @@ export class Tablero {
       return undefined;
     }
     return this.tablero[filas][columnas];
+    
   }
 
   public imprimirTablero() {
@@ -484,7 +485,8 @@ export class Tablero {
     }
 
     let filas: number = this.obtenerFilaLibre(columna);
-    this.tablero[filas][columna] = valor; 
+    this.tablero[filas][columna] = valor;
+    
   } 
 
   public limpiartableroVacio() {
@@ -526,19 +528,16 @@ Para implementar los test de la clase Tablero lo que hacemos es definir un table
 
 ### Problemas y Soluciones.
 
-* Además de diversos problemas con el uso de funciones que he solventado leyendo la parte referente al uso de arrays de la documentación proporcionada y a diferentes foros donde se solucionaba los problemas de conversión de tipos y de recorrido de arrays como los que tuve, no he podido implementar los ejercicoos 1,2 y 10 debido en parte a una mala compresión de mi parte de los enunciados. 
+* No he podido terminar el ejercicio 2 de la práctica puesto que no calcula bien los vecinos en las posiciones vertical, horizontal y diagonal. Por lo que el programa no llega a calcular cuando coinciden 4 fichas juntas. Sin embargo, la instancia de un tablero y la capacidad de almacenar  y colocar fichas primero en las posiciones más bajas de la matriz se ha probado y implementado correctamente. 
 
 
 ### Bibliografía.
-* [Guión de la Práctica 4](https://ull-esit-inf-dsi-2122.github.io/prct04-arrays-tuples-enums/)
-* [Manipulación de Cadenas en JavaScript](https://www.w3schools.com/js/js_string_methods.asp)
+* [Guión de la Práctica 4](https://ull-esit-inf-dsi-2122.github.io/prct05-objects-classes-interfaces/)
+* [Teoría de la asignatura - de Objetos, clases e interfaces](https://ull-esit-inf-dsi-2122.github.io/typescript-theory/typescript-objects-classes-interfaces.html)
 * [Desarrollo dirigido por pruebas TDD](https://es.wikipedia.org/wiki/Desarrollo_guiado_por_pruebas)
-* [Distancia de Manhattan](https://es.wikipedia.org/wiki/Distancia_euclidiana)
+* [GUía de Pokemon empleado para sus calculos](https://pokemondb.net/pokedex/all)
 * [Github](https://github.com/)
-* [Objeto math ](https://aprende-web.net/javascript/js9_3.php)
-* [Tuplas en TypeScript](https://lineadecodigo.com/typescript/tupla-en-typescript/)
-* [Teoría de la Asignatura - arrays tuplas y enumerados](https://ull-esit-inf-dsi-2122.github.io/typescript-theory/typescript-arrays-tuples-enums.html)
-
+* [Objetosy clases en JavaScript](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Classes)
 ---
 Autor: Joel Francisco Escobar Socas - 2021/2022.
 ---

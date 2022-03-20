@@ -1,4 +1,3 @@
-import {Ficha} from './ficha';
 /**
  * Clase que define la creación y el comportamiento de un Tablero de juego del Conect-4
  * @param fil Numero de Filas del Tablero
