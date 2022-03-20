@@ -633,7 +633,8 @@ describe('Test de la clase Partida', ()=> {
 * [Guión de la Práctica 4](https://ull-esit-inf-dsi-2122.github.io/prct05-objects-classes-interfaces/)
 * [Teoría de la asignatura - de Objetos, clases e interfaces](https://ull-esit-inf-dsi-2122.github.io/typescript-theory/typescript-objects-classes-interfaces.html)
 * [Desarrollo dirigido por pruebas TDD](https://es.wikipedia.org/wiki/Desarrollo_guiado_por_pruebas)
-* [GUía de Pokemon empleado para sus calculos](https://pokemondb.net/pokedex/all)
+* [Guía de Pokemon empleado para sus calculos](https://pokemondb.net/pokedex/all)
+* [Concecta 4](https://es.wikipedia.org/wiki/Conecta_4)
 * [Github](https://github.com/)
 * [Objetosy clases en JavaScript](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Classes)
 ---

@@ -9,6 +9,9 @@ A través de esta práctica se pretente saber cómo desarrollar clases y sus dif
 > Para acceder al informe de la práctica 5 piche [aquí]()
 > Para acceder al informe a través de Github Pages, pinche [aquí]()
 > Si desea acceder a la documentación de Typedoc puede acceder a través de el [siguiente recurso]()
+
+[![Coverage Status](https://coveralls.io/repos/github/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct05-objects-classes-interfaces-alu0101130408/badge.svg?branch=main)](https://coveralls.io/github/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct05-objects-classes-interfaces-alu0101130408?branch=main)
+
 ---
 
 Enlaces de interés:
